@@ -1,4 +1,4 @@
-#Q1. Print product, price, sum of quantity more than 5 sold during all three months.
+ #Q1. Print product, price, sum of quantity more than 5 sold during all three months.
 
 #Q2.Print product, quantity , month and count of records for which estimated_sale_price is less than purchase_cost
 
@@ -45,7 +45,7 @@
 # c) After retrieving all records of accounts and their linked accounts, display the  transaction amount of accounts appeared  in another column.
 
 # Q21.Display all type of “Credit cards”  accounts including linked "Add-on Credit Cards"
-# type accounts with their respective aggregate sum of transaction amount. 
+# type accounts with their respective aggregate sum of transaction amount.
 # Ref: Check linking relationship in bank_transaction_relationship_details.
 # Check transaction_amount in bank_account_transaction. 
 

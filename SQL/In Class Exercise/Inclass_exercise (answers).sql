@@ -1,5 +1,5 @@
 #Q1. Print product, price, sum of quantity more than 5 sold during all three months.  
-Select product, price , month, sum(quantity )
+Select product, price , month, sum(quantity)
 from bank_inventory_pricing
 Group by product , month
 Having sum(quantity) > 5;
@@ -8,7 +8,7 @@ Having sum(quantity) > 5;
 Select product, quantity , month ,
 sum( COALESCE ( estimated_sale_price < purchase_cost , 0, 1 )  ) count_of_trans
 from bank_inventory_pricing
-group by product , month
+group by product , month, Quantity
 having sum( COALESCE ( estimated_sale_price < purchase_cost , 0, 1 )  )  > 0;
 
 #Q3. Extarct the 3rd highest value of column Estimated_sale_price from bank_inventory_pricing dataset
@@ -37,7 +37,7 @@ Group by branch
 having  (sum(estimated_profit)  > sum(revenue - cost ) );
 
 #Q8.Find the least calculated profit earned during all 3 periods
-Select branch, product, cost , min(revenue-cost)
+Select branch, product , min(revenue-cost)
 From Bank_branch_PL
 group by  branch, product
 having min(revenue-cost) > 0;
@@ -201,7 +201,7 @@ SELECT
 	br.Account_Number recurring_deposit_account_number,
 	br.Account_type   recurring_deposit_account_type,
 	count(bat.transaction_date) transaction_date
-FROM bank_account ba
+FROM bank_account_ ba
 JOIN bank_account_relationship_details br
 ON ba.Account_Number = br.Linking_Account_Number
 JOIN bank_account_transaction bat
