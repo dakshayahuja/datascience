@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-Tableau/Take[[:space:]]Home[[:space:]]Exercise/201802-citibike-tripdata_Full[[:space:]]Data.csv filter=lfs diff=lfs merge=lfs -text
-=======
 *.csv filter=lfs diff=lfs merge=lfs -text
->>>>>>> e1e3b2f (restructured repo ✔️)
