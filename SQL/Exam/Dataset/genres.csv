@@ -1,14 +1,3 @@
-gen_id,gen_title
-1001,Action
-1002,Adventure
-1003,Animation
-1004,Biography
-1005,Comedy
-1006,Crime
-1007,Drama
-1008,Horror
-1009,Music
-1010,Mystery
-1011,Romance
-1012,Thriller
-1013,War
+version https://git-lfs.github.com/spec/v1
+oid sha256:d816ca66e449cc33e29378c5dd9b40e5f923e6a75fd6f46414aa4d3ffc2b2b77
+size 386

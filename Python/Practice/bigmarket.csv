@@ -1,12 +1,3 @@
-Month,Store,Sales
-Jan,A,31037
-Jan,B,20722
-Jan,C,24577
-Jan,D,34649
-Jan,E,29795
-Feb,A,29133
-Feb,B,22695
-Feb,C,28312
-Feb,D,31454
-Feb,E,46267
-March,A,32961
+version https://git-lfs.github.com/spec/v1
+oid sha256:25bf77fbe6920ac6371efcf198c8ce3b7530b9cf628d917157b64fc75603820c
+size 344

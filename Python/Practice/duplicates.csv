@@ -1,9 +1,3 @@
-Id,Name,Age,Gender,City
-1,Dakshay,21,Male
-2,Chitra,22,Female
-3,Anubhav,20,Male,Mohali
-4,Urja,21,Female,Chandigarh
-1,Dakshay,21,Male
-2,Chitra,22,Female
-6,Dakshay,16,Male
-7,Chitra,17,Female
+version https://git-lfs.github.com/spec/v1
+oid sha256:2712a5ae76de72690411a7c6e63d9696d3f324e0b1484e0f7a0cf0c9489cdef4
+size 380
