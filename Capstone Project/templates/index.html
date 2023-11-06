@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Song Recommendation</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Song Recommendation</h1>
+    <form id="recommendationForm">
+        <input type="text" name="song_name" placeholder="Enter Song Name" required>
+        <input type="number" name="num_recommendations" placeholder="Number of Recommendations" required>
+        <button type="submit">Recommend</button>
+    </form>
+
+    <div id="recommendations">
+        <!-- Recommendations will be displayed here -->
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $("#recommendationForm").submit(function(event){
+                event.preventDefault(); // Prevent the form from submitting via the browser
+                $.ajax({
+                    type: 'POST',
+                    url: '/recommend',
+                    data: $(this).serialize(),
+                    success: function(data){
+                        $("#recommendations").empty(); // Clear the previous recommendations
+                        if(data.error){
+                            $("#recommendations").append('<p>' + data.error + '</p>');
+                        } else {
+                            $.each(data, function(index, song){
+                                $("#recommendations").append('<p>Song Name: ' + song['Song Name'] + '</p>');
+                                $("#recommendations").append('<p>Artists: ' + song['Artists'] + '</p>');
+                                $("#recommendations").append('<p>Year: ' + song['Year'] + '</p>');
+                                $("#recommendations").append('<hr>');
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
