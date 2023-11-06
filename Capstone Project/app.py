@@ -1,37 +1,51 @@
-from flask import Flask, request, jsonify, render_template
-from main import recommend_songs, df
+from flask import Flask, render_template, request, redirect, url_for, flash
+import pandas as pd
+from sklearn.metrics.pairwise import cosine_similarity
+import os
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24)
 
-@app.route('/')
+df = pd.read_csv('dataset/final_data.csv')
+total_dataset = df.iloc[:, 6:17]
+
+def model(user_song_X, total_dataset, N_recommend):
+    cosine_sim = cosine_similarity(total_dataset, user_song_X)
+    song_similarity_scores = cosine_sim.flatten()
+    sorted_song_indices = song_similarity_scores.argsort()[::-1]
+    top_n_recommendations = sorted_song_indices[1:N_recommend+1]
+    return recommend_N(top_n_recommendations)
+
+def recommend_N(top_n_recommendations):
+    recommended_songs = df.iloc[top_n_recommendations]
+    formatted_songs = []
+
+    for index, song in recommended_songs.iterrows():
+        formatted_song = {
+            'track_id': song['id'],
+            'name': song['name'].title(),
+            'artists': ', '.join(eval(song['artists'])),
+            'year': song['year'],
+            'genres': song['genres'].title()
+        }
+        formatted_songs.append(formatted_song)
+
+    return formatted_songs
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    # This route will render the main page with the form.
-    return render_template('index.html')
+    recommendations = None
+    if request.method == 'POST':
+        user_song = request.form['song']
+        n_recommendations = int(request.form['number'])
+        user_song_X = df[df['name'].str.lower() == user_song.lower()].iloc[:1, 6:17]
 
-@app.route('/recommend', methods=['POST'])
-def recommend():
-    user_song_input = request.form['song_name'].lower()
-
-    try:
-        num_recommendations_input = int(request.form['num_recommendations'])
-    except ValueError:
-        num_recommendations_input = 5  # Fallback to 5 recommendations if input is invalid.
-
-    # Call the recommend_songs function from main.py, make sure it returns a DataFrame.
-    recommendations = recommend_songs(df.iloc[:, 6:17], user_song_input, num_recommendations_input)
-
-    # Check if recommendations were found
-    if recommendations is not None and not recommendations.empty:
-        # Construct the data to be returned as JSON
-        recommendations_data = [{
-            "Song Name": row['name'].title(),
-            "Artists": row['artists'],
-            "Year": row['year']
-        } for index, row in recommendations.iterrows()]
-        return jsonify(recommendations_data)
-    else:
-        # Return an error message if no recommendations are found
-        return jsonify({'error': 'No recommendations found for the given song name.'})
+        if not user_song_X.empty:
+            recommendations = model(user_song_X, total_dataset, n_recommendations)
+            return render_template('index.html', formatted_songs=recommendations)
+        else:
+            flash("Song not found in the dataset.")
+    return render_template('index.html', formatted_songs=recommendations)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=80)
