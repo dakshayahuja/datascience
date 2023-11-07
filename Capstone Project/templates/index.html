@@ -5,10 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Song Recommendation System</title>
+    <link rel="icon" href="{{ url_for('static', filename='icon.png') }}" type="image/png" sizes="96x96">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+   
 </head>
 <body>
     <div class="container-fluid">
@@ -24,7 +26,7 @@
                         <label for="number" class="sr-only">Number of Recommendations</label>
                         <input type="number" class="form-control" id="number" name="number" placeholder="Number of Recommendations" min="1" required>
                     </div>
-                    <button type="submit" class="btn btn-primary mb-2">Get Recommendations</button>
+                    <button type="submit" class="btn btn-success mb-2" id="submit-btn">Get Recommendations</button>
                 </form>
                 {% if message %}
                     <p>{{ message }}</p>

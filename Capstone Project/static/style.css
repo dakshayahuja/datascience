@@ -1,14 +1,15 @@
 /* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background: #f4f4f4;
   }
   
   h1 {
     text-align: center;
     padding-top: 20px;
+    font-weight: 600;
   }
   
   .form-container {
@@ -22,17 +23,20 @@ body {
   }
   
   #submit-btn {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #d81159;
     color: white;
     border: none;
     cursor: pointer;
+    border: 2px solid white;
+    border-radius: 5px;
   }
   
-  #submit-btn:hover {
-    background-color: #0056b3;
+  #submit-btn:hover,
+  #submit-btn:focus
+  #submit-btn:active {
+    border: 2px solid #d81159;
+    background: white;
+    color: #d81159;
   }
   
   .recommendations-table {
