@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, flash
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 import os
@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
 df = pd.read_csv('dataset/final_data.csv')
-total_dataset = df.iloc[:, 6:17]
+total_dataset = df.iloc[:, 6:18]
 
 def model(user_song_X, total_dataset, N_recommend):
     cosine_sim = cosine_similarity(total_dataset, user_song_X)
@@ -38,7 +38,7 @@ def index():
     if request.method == 'POST':
         user_song = request.form['song']
         n_recommendations = int(request.form['number'])
-        user_song_X = df[df['name'].str.lower() == user_song.lower()].iloc[:1, 6:17]
+        user_song_X = df[df['name'].str.lower() == user_song.lower()].iloc[:1, 6:18]
 
         if not user_song_X.empty:
             recommendations = model(user_song_X, total_dataset, n_recommendations)
